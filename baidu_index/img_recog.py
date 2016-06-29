@@ -85,10 +85,12 @@ class BaiduImgRecog:
 
     @staticmethod
     def __extract_ordinate_scale(scale):
-        scale = re.sub(" ", "", scale)
-        scale = re.sub(",", "", scale)
+        scale = re.sub(" |,|\.", "", scale)
         scale = scale.split("\n")
-        scale.remove("")
+        try:
+            scale.remove("")
+        except ValueError:
+            pass
         floor = int(scale[-1])
         interval = int(scale[-2]) - floor
         floor -= interval
