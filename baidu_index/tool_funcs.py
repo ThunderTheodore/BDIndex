@@ -8,3 +8,9 @@ def time2str(t):
 
 def str2time(s):
     return datetime.datetime.strptime(s, "%Y-%m-%d").date()
+
+
+def end_of_month(date):
+    one_day = datetime.timedelta(days=1)
+    y, m = divmod(date.month, 12)
+    return datetime.date(date.year+y, m+1, 1)-one_day
