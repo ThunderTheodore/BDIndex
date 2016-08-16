@@ -7,7 +7,7 @@ from PIL import Image
 from selenium import webdriver
 from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
 from selenium.common.exceptions import NoSuchElementException
-
+from selenium.common.exceptions import WebDriverException
 
 class BaiduCrawler:
     def __init__(self, account, password):
