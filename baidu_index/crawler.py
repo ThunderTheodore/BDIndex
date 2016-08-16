@@ -46,9 +46,27 @@ class BaiduCrawler:
             self.driver.find_element_by_name("userName").send_keys(self.account)
             self.driver.find_element_by_name("password").send_keys(self.password)
             self.driver.find_element_by_id("TANGRAM_12__submit").click()
-            print "Login successfully..."
+            while True:
+                time.sleep(1)
+                try:
+                    self.driver.find_element_by_id("select-countrycode")
+                    print "Login successfully..."
+                    break
+                except NoSuchElementException:
+                    pass
+                try:
+                    vc = self.driver.find_element_by_name("verifyCode")
+                    self.driver.save_screenshot('./login.png')
+                    verify_code = raw_input("Please check out the login.png and input the verification code!\n")
+                    vc.send_keys(verify_code)
+                    self.driver.find_element_by_id("TANGRAM_12__submit").click()
+                except NoSuchElementException:
+                    print "Login successfully..."
+                    break
+                except WebDriverException:
+                    print "Wrong verification code!"
         except NoSuchElementException:
-            print "Already login..."
+            print "Login page has changed\n...Please contact author..."
 
     def go_to_page(self):
         self.driver.get(self.url_bdi)
