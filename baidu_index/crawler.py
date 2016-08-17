@@ -77,7 +77,7 @@ class BaiduCrawler:
         time.sleep(1)
         data = self.driver.get_screenshot_as_png()
         entire_page = Image.open(StringIO.StringIO(data))
-        img_element = self.driver.find_element_by_css_selector("rect[style=\"opacity: 0; \"]")
+        img_element = self.driver.find_element_by_css_selector("rect[style$=\"opacity: 0;\"]")
         location = img_element.location  # find the location
         size = img_element.size
         crop_rect = (int(location['x']), int(location['y']), int(location['x'] + size['width']),
