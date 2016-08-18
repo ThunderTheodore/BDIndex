@@ -58,7 +58,9 @@ class BaiduCrawler:
                     vc = self.driver.find_element_by_name("verifyCode")
                     self.driver.save_screenshot('./login.png')
                     verify_code = raw_input("Please check out the login.png and input the verification code!\n")
+                    vc.clear()
                     vc.send_keys(verify_code)
+                    time.sleep(0.2)
                     self.driver.find_element_by_id("TANGRAM_12__submit").click()
                 except NoSuchElementException:
                     print "Login successfully..."
